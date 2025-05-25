@@ -81,6 +81,13 @@ Config.deckSize = {
 
 Config.frames = {
     -- Configurações para o menuFrame
+    sideFrame = {
+        imagemPath = "assets/frames/sideFrame.png",
+        largura = 800,  -- ajuste conforme a resolução da sua interface
+        altura = 600,
+        x = 0,
+        y = 0,
+    },
     menuFrame = {
         imagemPath = "assets/frames/menuFrame.png", -- Adicionei de volta, pois é essencial para carregar a imagem
         largura = 288,

@@ -8,9 +8,11 @@ function Botao:new(x, y, width, height, texto, funcao)
         width = width,
         height = height,
         texto = texto,
+        
         corNormal = Config.coresBotao.normal,
         corHover = Config.coresBotao.hover,
         corSelecionado = Config.coresBotao.selecionado,
+        
         funcao = funcao,
         selecionado = false,
         mouseSobre = false
