@@ -33,7 +33,7 @@ Config.deckRandomImages = {
     "assets/mystery/18.png",
     "assets/mystery/19.png",
     "assets/mystery/21.png",
-    defaultErrorImage = "assets/mystery/21.png",
+    defaultErrorImage = "assets/mystery/default.png",
 }
 
 Config.deckCardName = {
@@ -100,20 +100,28 @@ Config.frames = {
         x = 0,
         y = 0,
     },
+
     menuFrame = {
         imagemPath = "assets/frames/menuFrame.png", -- Adicionei de volta, pois é essencial para carregar a imagem
-        largura = 288,
+        largura = 300,
         altura = 360,
         x = 50,
         y = 50,
     },
     -- Configurações para o cardFrame
     cardFrame = {
-        imagemPath = "assets/frames/cardFrame.png", -- Adicionei de volta
-        largura = 288,
-        altura = 360,
-        x = 300,
-        y = 50,
+        imagemPath = "assets/frames/cardFrame.png",
+        largura = 550,  -- ajuste conforme a resolução da sua interface
+        altura = 700,
+        x = 0,
+        y = 0,
+    },
+    descricaoFrame = {
+        imagemPath = "assets/frames/descricaoFrame.png",
+        largura = 550,  -- ajuste conforme a resolução da sua interface
+        altura = 700,
+        x = 0,
+        y = 0,
     },
 }
 

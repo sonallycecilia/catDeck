@@ -17,7 +17,7 @@ end
 local deck, carta
 local botoes = {}
 local botaoEmbaralhar, botaoRevelar
-local cardFrame, menuFrame, sideFrame
+local cardFrame, menuFrame, sideFrame, descricaoFrame
 local imagemCartaRevelada
 
 function love.load()
@@ -28,7 +28,8 @@ function love.load()
     --FRAMES
     menuFrame = Frame:new(Config.frames.menuFrame, 0, 150)
     sideFrame = Frame:new(Config.frames.sideFrame, 550, 0, 1.5, 1.5)
-    --cardFrame = Frame:new(Config.frames.cardFrame, 1050, 280, 0.4, 0.4)
+    --cardFrame = Frame:new(Config.frames.cardFrame, 1250, 650, 0.2, 0.2)
+    descricaoFrame = Frame:new(Config.frames.descricaoFrame, 900, 90, 1.0, 1.0)
 
     -- BOTOES dentro do menuFrame
     local baseX = menuFrame.x+170
@@ -77,6 +78,8 @@ function love.draw()
     -- Desenha os frames
     menuFrame:draw()
     sideFrame:draw()
+    descricaoFrame:draw()
+    --cardFrame:draw()
     --cardFrame:draw()
     
     --desenhando botoes
