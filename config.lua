@@ -9,6 +9,7 @@ local function hexToRGB(hex)
     return { r, g, b }
 end
 
+--constantes?
 Config.scaleX = 0.5
 Config.scaleY = 0.5
 Config.defaultErrorImage = "assets/erro.png"
@@ -118,7 +119,7 @@ Config.frames = {
     },
     descricaoFrame = {
         imagemPath = "assets/frames/descricaoFrame.png",
-        largura = 550,  -- ajuste conforme a resolução da sua interface
+        largura = 550,   -- era: largura
         altura = 700,
         x = 0,
         y = 0,

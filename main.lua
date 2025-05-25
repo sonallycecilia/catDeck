@@ -31,6 +31,7 @@ function love.load()
     --cardFrame = Frame:new(Config.frames.cardFrame, 1250, 650, 0.2, 0.2)
     descricaoFrame = Frame:new(Config.frames.descricaoFrame, 900, 90, 1.0, 1.0)
 
+    
     -- BOTOES dentro do menuFrame
     local baseX = menuFrame.x+170
     local baseY = menuFrame.y+270
@@ -74,15 +75,18 @@ function love.draw()
     -- configurações de tela
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.clear(1, 1, 1, 1) --resetando a tela
-    
+
     -- Desenha os frames
     menuFrame:draw()
     sideFrame:draw()
     descricaoFrame:draw()
-    --cardFrame:draw()
-    --cardFrame:draw()
-    
+
     --desenhando botoes
     botaoEmbaralhar:draw()
     botaoRevelar:draw()
+
+    if deck.cartaRevelada then
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.draw(imagemCartaRevelada, descricaoFrame.x + 50, descricaoFrame.y + 50, 0, 0.3, 0.3)
+    end
 end
