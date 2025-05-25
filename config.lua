@@ -1,10 +1,5 @@
 Config = {}
 
-Config.deckSize = {
-    alturaCarta = 320,
-    larguraCarta = 200,
-}
-
 Config.deckCatImages = {
         "assets/cats/1.jpg",
         "assets/cats/3.jpg",
@@ -73,6 +68,25 @@ Config.deckDescription = {
     "Joy, success, positivity, vitality.",
     "Judgment, rebirth, inner calling.",
     "Completion, integration, accomplishment.",
+}
+
+Config.deckSize = {
+    alturaCarta = 320,
+    larguraCarta = 200,
+}
+
+local function hexToRGB(hex)
+    hex = hex:gsub("#", "")
+    local r = tonumber(hex:sub(1, 2), 16) / 255
+    local g = tonumber(hex:sub(3, 4), 16) / 255
+    local b = tonumber(hex:sub(5, 6), 16) / 255
+    return { r, g, b }
+end
+
+Config.coresBotao = {
+    normal = hexToRGB("#9079a8"),
+    hover = hexToRGB("#d4c4e9"),
+    selecionado = hexToRGB("#b98eb9")
 }
 
 return Config
