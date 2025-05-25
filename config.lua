@@ -75,6 +75,39 @@ Config.deckSize = {
     larguraCarta = 200,
 }
 
+Config.deckSize = {
+    alturaCarta = 320,
+    larguraCarta = 200,
+}
+
+Config.frames = {
+    -- Configurações para o menuFrame
+    menuFrame = {
+        imagemPath = "menuFrame.jpg", -- Adicionei de volta, pois é essencial para carregar a imagem
+        largura = 288,
+        altura = 360,
+        x = 50,
+        y = 50,
+    },
+    -- Configurações para o cardFrame
+    cardFrame = {
+        imagemPath = "cardFrame.png", -- Adicionei de volta
+        largura = 288,
+        altura = 360,
+        x = 300,
+        y = 50,
+    },
+    -- Configurações para o versoCard
+    versoCard = {
+        imagemPath = "versoCard.jpg", -- Adicionei de volta
+        largura = 288,
+        altura = 360,
+        x = 550,
+        y = 50,
+    },
+}
+
+
 local function hexToRGB(hex)
     hex = hex:gsub("#", "")
     local r = tonumber(hex:sub(1, 2), 16) / 255

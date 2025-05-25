@@ -6,7 +6,8 @@ function Carta:new(id, nome, imagemPath, descricao)
         id = id,
         name = nome,
         description = descricao,
-        image = love.graphics.newImage(imagemPath),
+        imagemPath = imagemPath,
+        imagePng = love.graphics.newImage(imagemPath),
     }
     setmetatable(novaCarta, Carta_mt)
     return novaCarta

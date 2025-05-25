@@ -1,6 +1,7 @@
 local Config = require("config")
 local Deck = require("classes.deck")
 local Botao = require("interface.botao")
+local Frame = require("interface.frames")
 
 --debuuger
 if os.getenv "LOCAL_LUA_DEBUGGER_VSCODE" == "1" then
@@ -13,22 +14,32 @@ if os.getenv "LOCAL_LUA_DEBUGGER_VSCODE" == "1" then
     end
 end
 
-local deck
+local deck, carta
 local botaoEmbaralhar, botaoRevelar
+local cardFrame, menuFrame, cardFrame, versoCard
+local imagemCartaRevelada
 
 function love.load()
+    -- DECK
+    deck = Deck:new("Cat Deck")
+    deck:criarDeckGato()
+
+    --FRAMES
+    cardFrame = Frame:new(100, 100, "assets/frames/cardFrame.png")
+    menuFrame = Frame:new(50, 50, "assets/frames/menuFrame.png")
+    versoCard = Frame:new(200, 200, "assets/frames/versoCard.png")
+
     -- BOTOES
     botaoEmbaralhar = Botao:new(100, 500, 200, 50, "Embaralhar", function()
         deck:embaralhar()
     end)
 
     botaoRevelar = Botao:new(400, 500, 200, 50, "Revelar", function()
-        deck:revelarCarta()
-    end)
-
-    -- DECK
-    deck = Deck:new("Cat Deck")
-    deck:criarDeckGato()
+        carta = deck:revelarCarta()
+        if carta and carta.imagemPath then
+            imagemCartaRevelada = love.graphics.newImage(carta.imagemPath)
+        end
+end)
 
 end
 
@@ -45,14 +56,22 @@ function love.mousepressed(x, y, button) --callback, unica funcao mousepressed
     end
 end
 
-
-function love.draw()
-    love.graphics.clear(1, 1, 1, 1)
-
-    botaoEmbaralhar:draw()
-    botaoRevelar:draw()
-
-    --deck:drawDeck()
-
+function love.keypressed(key)
+    if key == "escape" then
+        love.event.quit()
+    end
 end
 
+function love.draw()
+    -- configurações de tela
+
+    love.graphics.clear(1, 1, 1, 1) --resetando a tela
+    
+    -- Desenha os frames
+    cardFrame:draw()
+    
+
+    --botaoEmbaralhar:draw()
+    --botaoRevelar:draw()
+
+end
