@@ -1,7 +1,7 @@
 local Config = require("config")
 local Deck = require("classes.deck")
 local Botao = require("interface.botao")
-local Frame = require("interface.frames")
+local Frame = require("interface.frame")
 
 --debuuger
 if os.getenv "LOCAL_LUA_DEBUGGER_VSCODE" == "1" then
@@ -16,7 +16,7 @@ end
 
 local deck, carta
 local botaoEmbaralhar, botaoRevelar
-local cardFrame, menuFrame, cardFrame, versoCard
+local cardFrame, menuFrame
 local imagemCartaRevelada
 
 function love.load()
@@ -25,9 +25,8 @@ function love.load()
     deck:criarDeckGato()
 
     --FRAMES
-    cardFrame = Frame:new(100, 100, "assets/frames/cardFrame.png")
-    menuFrame = Frame:new(50, 50, "assets/frames/menuFrame.png")
-    versoCard = Frame:new(200, 200, "assets/frames/versoCard.png")
+    menuFrame = Frame:new(Config.frames.menuFrame, 50, 150)
+    cardFrame = Frame:new(Config.frames.cardFrame, 1050, 280, 0.4, 0.4)
 
     -- BOTOES
     botaoEmbaralhar = Botao:new(100, 500, 200, 50, "Embaralhar", function()
@@ -68,6 +67,8 @@ function love.draw()
     love.graphics.clear(1, 1, 1, 1) --resetando a tela
     
     -- Desenha os frames
+    --cardFrame:draw()
+    menuFrame:draw()
     cardFrame:draw()
     
 

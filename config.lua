@@ -1,5 +1,9 @@
 Config = {}
 
+Config.scaleX = 0.5
+Config.scaleY = 0.5
+Config.defaultErrorImage = "assets/erro.png"
+
 Config.deckCatImages = {
         "assets/cats/1.jpg",
         "assets/cats/3.jpg",
@@ -75,15 +79,10 @@ Config.deckSize = {
     larguraCarta = 200,
 }
 
-Config.deckSize = {
-    alturaCarta = 320,
-    larguraCarta = 200,
-}
-
 Config.frames = {
     -- Configurações para o menuFrame
     menuFrame = {
-        imagemPath = "menuFrame.jpg", -- Adicionei de volta, pois é essencial para carregar a imagem
+        imagemPath = "assets/frames/menuFrame.png", -- Adicionei de volta, pois é essencial para carregar a imagem
         largura = 288,
         altura = 360,
         x = 50,
@@ -91,18 +90,10 @@ Config.frames = {
     },
     -- Configurações para o cardFrame
     cardFrame = {
-        imagemPath = "cardFrame.png", -- Adicionei de volta
+        imagemPath = "assets/frames/cardFrame.png", -- Adicionei de volta
         largura = 288,
         altura = 360,
         x = 300,
-        y = 50,
-    },
-    -- Configurações para o versoCard
-    versoCard = {
-        imagemPath = "versoCard.jpg", -- Adicionei de volta
-        largura = 288,
-        altura = 360,
-        x = 550,
         y = 50,
     },
 }
