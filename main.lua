@@ -17,27 +17,29 @@ end
 local deck, carta
 local botoes = {}
 local botaoEmbaralhar, botaoRevelar
-local cardFrame, menuFrame, sideFrame
+local cardFrame, menuFrame, sideFrame, descricaoFrame
 local imagemCartaRevelada
 
 function love.load()
     -- DECK
     deck = Deck:new("Myterious Mysteries")
-    deck:criarDeckGato()
+    deck:criarDeck(Config.deckRandomImages)
 
     --FRAMES
     menuFrame = Frame:new(Config.frames.menuFrame, 0, 150)
     sideFrame = Frame:new(Config.frames.sideFrame, 550, 0, 1.5, 1.5)
-    --cardFrame = Frame:new(Config.frames.cardFrame, 1050, 280, 0.4, 0.4)
+    --cardFrame = Frame:new(Config.frames.cardFrame, 1250, 650, 0.2, 0.2)
+    descricaoFrame = Frame:new(Config.frames.descricaoFrame, 900, 90, 1.0, 1.0)
 
+    
     -- BOTOES dentro do menuFrame
-    local baseX = menuFrame.x
-    local baseY = menuFrame.y+100
-    botaoEmbaralhar = Botao:new(baseX + 20, baseY + 250, 200, 50, "Embaralhar", function()
+    local baseX = menuFrame.x+170
+    local baseY = menuFrame.y+270
+    botaoEmbaralhar = Botao:new(baseX, baseY + 270, 200, 50, "EMBARALHAR", function()
         deck:embaralhar()
     end)
 
-    botaoRevelar = Botao:new(baseX + 20, baseY + 310, 200, 50, "Revelar", function()
+    botaoRevelar = Botao:new(baseX, baseY + 330, 200, 50, "REVELAR", function()
         carta = deck:revelarCarta()
         if carta and carta.imagemPath then
             imagemCartaRevelada = love.graphics.newImage(carta.imagemPath)
@@ -73,13 +75,18 @@ function love.draw()
     -- configurações de tela
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.clear(1, 1, 1, 1) --resetando a tela
-    
+
     -- Desenha os frames
     menuFrame:draw()
     sideFrame:draw()
-    --cardFrame:draw()
-    
+    descricaoFrame:draw()
+
     --desenhando botoes
     botaoEmbaralhar:draw()
     botaoRevelar:draw()
+
+    if deck.cartaRevelada then
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.draw(imagemCartaRevelada, descricaoFrame.x + 50, descricaoFrame.y + 50, 0, 0.3, 0.3)
+    end
 end

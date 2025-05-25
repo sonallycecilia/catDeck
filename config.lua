@@ -1,30 +1,43 @@
 Config = {}
 
+--metodos uteis
+local function hexToRGB(hex)
+    hex = hex:gsub("#", "")
+    local r = tonumber(hex:sub(1, 2), 16) / 255
+    local g = tonumber(hex:sub(3, 4), 16) / 255
+    local b = tonumber(hex:sub(5, 6), 16) / 255
+    return { r, g, b }
+end
+
+--constantes?
 Config.scaleX = 0.5
 Config.scaleY = 0.5
 Config.defaultErrorImage = "assets/erro.png"
 
-Config.deckCatImages = {
-        "assets/cats/1.jpg",
-        "assets/cats/3.jpg",
-        "assets/cats/4.jpg",
-        "assets/cats/5.jpg",
-        "assets/cats/6.jpg",
-        "assets/cats/7.jpg",
-        "assets/cats/9.jpg",
-        "assets/cats/10.jpg",
-        "assets/cats/12.jpg",
-        "assets/cats/14.jpg",
-        "assets/cats/15.jpg",
-        "assets/cats/16.jpg",
-        "assets/cats/17.jpg",
-        "assets/cats/18.jpg",
-        "assets/cats/19.jpg",
-        "assets/cats/20.jpg",
-        "assets/cats/21.jpg",
+Config.botoes = {
+    revelarImagem = "assets/botoes/revelar.png",
+    embaralharImagem = "assets/botoes/embaralhar.png",
+    largura = 200,
+    altura = 50,
+    coresBotao = {
+        normal = hexToRGB("#9079a8"),
+        hover = hexToRGB("#d4c4e9"),
+        selecionado = hexToRGB("#b98eb9")
+    }
+    
 }
 
-Config.deckName = {
+Config.deckRandomImages = {
+    "assets/mystery/2.png",
+    "assets/mystery/13.png",
+    "assets/mystery/14.png",
+    "assets/mystery/18.png",
+    "assets/mystery/19.png",
+    "assets/mystery/21.png",
+    defaultErrorImage = "assets/mystery/default.png",
+}
+
+Config.deckCardName = {
     "The Fool",
     "The Magician",
     "The High Priestess",
@@ -88,36 +101,29 @@ Config.frames = {
         x = 0,
         y = 0,
     },
+
     menuFrame = {
         imagemPath = "assets/frames/menuFrame.png", -- Adicionei de volta, pois é essencial para carregar a imagem
-        largura = 288,
+        largura = 300,
         altura = 360,
         x = 50,
         y = 50,
     },
     -- Configurações para o cardFrame
     cardFrame = {
-        imagemPath = "assets/frames/cardFrame.png", -- Adicionei de volta
-        largura = 288,
-        altura = 360,
-        x = 300,
-        y = 50,
+        imagemPath = "assets/frames/cardFrame.png",
+        largura = 550,  -- ajuste conforme a resolução da sua interface
+        altura = 700,
+        x = 0,
+        y = 0,
     },
-}
-
-
-local function hexToRGB(hex)
-    hex = hex:gsub("#", "")
-    local r = tonumber(hex:sub(1, 2), 16) / 255
-    local g = tonumber(hex:sub(3, 4), 16) / 255
-    local b = tonumber(hex:sub(5, 6), 16) / 255
-    return { r, g, b }
-end
-
-Config.coresBotao = {
-    normal = hexToRGB("#9079a8"),
-    hover = hexToRGB("#d4c4e9"),
-    selecionado = hexToRGB("#b98eb9")
+    descricaoFrame = {
+        imagemPath = "assets/frames/descricaoFrame.png",
+        largura = 550,   -- era: largura
+        altura = 700,
+        x = 0,
+        y = 0,
+    },
 }
 
 return Config
