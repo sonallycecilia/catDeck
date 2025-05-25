@@ -23,7 +23,7 @@ local imagemCartaRevelada
 function love.load()
     -- DECK
     deck = Deck:new("Myterious Mysteries")
-    deck:criarDeckGato()
+    deck:criarDeck(Config.deckRandomImages)
 
     --FRAMES
     menuFrame = Frame:new(Config.frames.menuFrame, 0, 150)
@@ -31,13 +31,13 @@ function love.load()
     --cardFrame = Frame:new(Config.frames.cardFrame, 1050, 280, 0.4, 0.4)
 
     -- BOTOES dentro do menuFrame
-    local baseX = menuFrame.x
-    local baseY = menuFrame.y+100
-    botaoEmbaralhar = Botao:new(baseX + 20, baseY + 250, 200, 50, "Embaralhar", function()
+    local baseX = menuFrame.x+170
+    local baseY = menuFrame.y+270
+    botaoEmbaralhar = Botao:new(baseX, baseY + 270, 200, 50, "EMBARALHAR", function()
         deck:embaralhar()
     end)
 
-    botaoRevelar = Botao:new(baseX + 20, baseY + 310, 200, 50, "Revelar", function()
+    botaoRevelar = Botao:new(baseX, baseY + 330, 200, 50, "REVELAR", function()
         carta = deck:revelarCarta()
         if carta and carta.imagemPath then
             imagemCartaRevelada = love.graphics.newImage(carta.imagemPath)

@@ -16,11 +16,11 @@ function Deck:new(nome)
     return novoDeck
 end
 
-function Deck:criarDeckGato()
+function Deck:criarDeck(configTable)
     local cartas = {}
-    for i = 1, #Config.deckCatImages do
-        local img = Config.deckCatImages[i]
-        local nome = Config.deckName[i] or ("Carta " .. i)
+    for i = 1, 21 do
+        local img = configTable[i] or configTable.defaultErrorImage
+        local nome = Config.deckCardName[i] or ("Carta " .. i)
         local desc = Config.deckDescription[i] or "Sem descrição"
 
         local carta = Carta:new(i, nome, img, desc)
