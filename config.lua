@@ -1,5 +1,9 @@
 Config = {}
 
+Config.scaleX = 0.5
+Config.scaleY = 0.5
+Config.defaultErrorImage = "assets/erro.png"
+
 Config.deckCatImages = {
         "assets/cats/1.jpg",
         "assets/cats/3.jpg",
@@ -74,6 +78,33 @@ Config.deckSize = {
     alturaCarta = 320,
     larguraCarta = 200,
 }
+
+Config.frames = {
+    -- Configurações para o menuFrame
+    sideFrame = {
+        imagemPath = "assets/frames/sideFrame.png",
+        largura = 800,  -- ajuste conforme a resolução da sua interface
+        altura = 600,
+        x = 0,
+        y = 0,
+    },
+    menuFrame = {
+        imagemPath = "assets/frames/menuFrame.png", -- Adicionei de volta, pois é essencial para carregar a imagem
+        largura = 288,
+        altura = 360,
+        x = 50,
+        y = 50,
+    },
+    -- Configurações para o cardFrame
+    cardFrame = {
+        imagemPath = "assets/frames/cardFrame.png", -- Adicionei de volta
+        largura = 288,
+        altura = 360,
+        x = 300,
+        y = 50,
+    },
+}
+
 
 local function hexToRGB(hex)
     hex = hex:gsub("#", "")

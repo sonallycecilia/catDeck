@@ -1,6 +1,7 @@
 local Config = require("config")
 local Deck = require("classes.deck")
 local Botao = require("interface.botao")
+local Frame = require("interface.frame")
 
 --debuuger
 if os.getenv "LOCAL_LUA_DEBUGGER_VSCODE" == "1" then
@@ -13,46 +14,72 @@ if os.getenv "LOCAL_LUA_DEBUGGER_VSCODE" == "1" then
     end
 end
 
-local deck
+local deck, carta
+local botoes = {}
 local botaoEmbaralhar, botaoRevelar
+local cardFrame, menuFrame, sideFrame
+local imagemCartaRevelada
 
 function love.load()
-    -- BOTOES
-    botaoEmbaralhar = Botao:new(100, 500, 200, 50, "Embaralhar", function()
+    -- DECK
+    deck = Deck:new("Myterious Mysteries")
+    deck:criarDeckGato()
+
+    --FRAMES
+    menuFrame = Frame:new(Config.frames.menuFrame, 0, 150)
+    sideFrame = Frame:new(Config.frames.sideFrame, 550, 0, 1.5, 1.5)
+    --cardFrame = Frame:new(Config.frames.cardFrame, 1050, 280, 0.4, 0.4)
+
+    -- BOTOES dentro do menuFrame
+    local baseX = menuFrame.x
+    local baseY = menuFrame.y+100
+    botaoEmbaralhar = Botao:new(baseX + 20, baseY + 250, 200, 50, "Embaralhar", function()
         deck:embaralhar()
     end)
 
-    botaoRevelar = Botao:new(400, 500, 200, 50, "Revelar", function()
-        deck:revelarCarta()
+    botaoRevelar = Botao:new(baseX + 20, baseY + 310, 200, 50, "Revelar", function()
+        carta = deck:revelarCarta()
+        if carta and carta.imagemPath then
+            imagemCartaRevelada = love.graphics.newImage(carta.imagemPath)
+        end
     end)
-
-    -- DECK
-    deck = Deck:new("Cat Deck")
-    deck:criarDeckGato()
+    table.insert(botoes, botaoEmbaralhar)
+    table.insert(botoes, botaoRevelar)
 
 end
 
 function love.update(dt)
     local mx, my = love.mouse.getPosition()
-    botaoEmbaralhar:update(mx, my)
-    botaoRevelar:update(mx, my)
-end
-
-function love.mousepressed(x, y, button) --callback, unica funcao mousepressed
-    if button == 1 then -- botão esquerdo do mouse
-        botaoEmbaralhar:clicar(x, y)
-        botaoRevelar:clicar(x, y)
+    for _, botao in ipairs(botoes) do
+        botao:update(mx, my)
     end
 end
 
-
-function love.draw()
-    love.graphics.clear(1, 1, 1, 1)
-
-    botaoEmbaralhar:draw()
-    botaoRevelar:draw()
-
-    --deck:drawDeck()
-
+function love.mousepressed(x, y, button)
+    if button == 1 then
+        for _, botao in ipairs(botoes) do
+            botao:clicar(x, y)
+        end
+    end
 end
 
+function love.keypressed(key)
+    if key == "x" then
+        love.event.quit()
+    end
+end
+
+function love.draw()
+    -- configurações de tela
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.clear(1, 1, 1, 1) --resetando a tela
+    
+    -- Desenha os frames
+    menuFrame:draw()
+    sideFrame:draw()
+    --cardFrame:draw()
+    
+    --desenhando botoes
+    botaoEmbaralhar:draw()
+    botaoRevelar:draw()
+end

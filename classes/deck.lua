@@ -7,34 +7,35 @@ local Deck_mt = { __index = Deck }
 function Deck:new(nome)
     local novoDeck = {
         nome = nome,
-        deck = {},
+        cartas = {},
         largura = Config.deckSize.larguraCarta,
         altura = Config.deckSize.alturaCarta,
+        cartaRevelada = nil, -- Armazena a carta revelada
     }
     setmetatable(novoDeck, Deck_mt)
     return novoDeck
 end
 
 function Deck:criarDeckGato()
-    local deck = {}
+    local cartas = {}
     for i = 1, #Config.deckCatImages do
         local img = Config.deckCatImages[i]
         local nome = Config.deckName[i] or ("Carta " .. i)
         local desc = Config.deckDescription[i] or "Sem descrição"
 
         local carta = Carta:new(i, nome, img, desc)
-        table.insert(deck, carta)
+        table.insert(cartas, carta)
     end
-    self.deck = deck
-    return deck
+    self.cartas = cartas
+    return cartas
 end
 
 function Deck:embaralhar()
     math.randomseed(os.time()) --pegando seed aleatório para embaralhar as cartas
-    local n = #self.deck
+    local n = #self.cartas
     for i = n, 2, -1 do
         local j = math.random(i)
-        self.deck[i], self.deck[j] = self.deck[j], self.deck[i]
+        self.cartas[i], self.cartas[j] = self.cartas[j], self.cartas[i]
     end
     print("Deck embaralhado!")
 end
@@ -53,13 +54,25 @@ function Deck:drawDeck()
 end
 
 function Deck:revelarCarta()
-    local carta = self.deck[1] -- Revela a primeira carta do deck
-    if carta then
-        print("Revelando carta: " .. carta.name)
-        carta:draw(400, 300) -- Desenha a carta na posição (400, 300)
-    else
-        print("Nenhuma carta no deck.")
+    if self.cartas[1] then
+        self.cartaRevelada = self.cartas[1]  -- Armazena a carta revelada
+        print("Revelando carta: " .. self.cartas[1].name)
+        return self.cartas[1]
     end
 end
+
+function Deck:drawCartaRevelada(carta)
+    if self.cartaRevelada and self.cartaRevelada.imagemPath then
+        local x = (love.graphics.getWidth() - self.largura) / 2
+        local y = (love.graphics.getHeight() - self.altura) / 2
+
+        love.graphics.rectangle("fill", x, y, self.largura, self.altura)
+
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.printf(self.cartaRevelada.name, x, y + self.altura / 2 - 8, self.largura, "center")
+    end
+end
+
+
 
 return Deck
